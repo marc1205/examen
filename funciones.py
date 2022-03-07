@@ -9,10 +9,11 @@ def encontrar_menores(diccionario,letra):
     Returns:
       resultado: ej. ['AUNQUE','ABINAR']
     """
+    """1. Como resultado = [] estaba dentro del bucle y dntro del if , cada vez que comprobaba una letra menor que "b", se guardaba en la lista, pero iba machacando la anterior palabra. Por eso no terminaba de funcionar. 2. Solucion: sacar el resultado = [] fuera del bucle"""
+    resultado=[]
     for clave in diccionario:
         for palabra in diccionario[clave]:
             if palabra[0] < letra:
-                resultado=[]
                 resultado.append(palabra)
     return resultado
 
@@ -26,13 +27,15 @@ def add_client(clients_list,nif,name,address,phone,email):
       phone
       email
     """
+    """1. Error: declarabamos dos diccionarios, uno dentro de otro. 2. Solucion: quitar la declaración del segundo diccionario (nif) """
     clients_list[nif] = {
-        nif: {'name': name,
-              'address': address,
-              'phone': phone,
-              'email': email
-        }
+        'name': name,
+        'address': address,
+        'phone': phone,
+        'email': email
+        
     }
+    
 
 def repartir_cartas(cartas_iniciales,repeticiones):
     """Dada una baraja de cartas iniciales y un número de repeticiones, esta función selecciona 5 cartas aleatorias de esta baraja y las mete en un diccionario llamado combinaciones. El proceso se repite tantas veces como repeticiones se indiquen.
@@ -53,4 +56,3 @@ def repartir_cartas(cartas_iniciales,repeticiones):
 
     return combinaciones
 
-    
