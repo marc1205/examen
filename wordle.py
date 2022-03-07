@@ -19,7 +19,7 @@ def choose_secret(fichero):
     palabraMajuscula = palabra.upper()
     return palabraMajuscula
     
-def compare_words(word, secret):
+def compare_words(word):
     """Dadas dos palabras en mayúsculas (word y secret), esta función calcula las posiciones de las letras de word que aparecen 
         en la misma posición en secret, y las posiciones de las letras de word que aparecen en secret pero en una posición distinta.
     Args:
@@ -29,19 +29,17 @@ def compare_words(word, secret):
       same_position: Lista de posiciones de word cuyas letras coinciden en la misma posición en secret. En el caso anterior: [0]
       same_letter: Lista de posiciones de word cuyas letras están en secret pero en posiciones distintas. En el caso anterior: [1,2]
     """
-    def same_position():
-      letras_posicion = []
-      for i in range(5):
-        if word[i] == secret[i]:
-          letras_posicion[i]
-      return letras_posicion
-    def same_letter():
-      letra_sinposicion = []
-      for i in range(5):
-        for j in range(5):
-          if word[i] == secret[j]:
-            letra_sinposicion = i
-      return letra_sinposicion
+    same_position = []
+    for i in range(4):
+      if word[i] == secret[i]:
+        same_position = word[i]
+
+    same_letter = []
+    for i in range(4):
+      for j in range(4):
+        if word[i] == secret[j]:
+          same_letter = word[i]
+    return same_position, same_letter
 
 def print_word(word, same_position, same_letter):
     """Dada una palabra, una lista same_position y otra lista same_letter, esta función creará un string donde aparezcan 
@@ -55,13 +53,13 @@ def print_word(word, same_position, same_letter):
       transformed: La palabra aplicando las transformaciones. En el caso anterior: "Cam--"
     """
     palabra = []
-    for i in range(5):
-      if word[i] == same_position():
+    for i in range(4):
+      if word[i] == same_position:
         palabra[i] = word[i].upper()
-      if word[i] == same_letter():
+      if word[i] == same_letter:
         palabra[i] = word[i].lower()
       if word[i] != (same_position and same_letter):
-        palabra[i] = "-"
+        palabra[i] = 0
     return palabra
 
 
@@ -85,12 +83,13 @@ def check_valid_word():
     """
 
 if __name__ == "__main__":
-    secret=choose_secret()
+    secret=choose_secret("palabras_reduced.txt")
     print("Palabra a adivinar: "+secret)#Debug: esto es para que sepas la palabra que debes adivinar
     for repeticiones in range(0,6):
         word = input("Introduce una nueva palabra: ")
-        same_position, same_letter = compare_words()
-        resultado=print_word()
+        same_position, same_letter = compare_words(word)
+        """compare_words()"""
+        resultado=print_word(word, same_position, same_letter)
         print(resultado)
         if word == secret:
             print("HAS GANADO!!")
