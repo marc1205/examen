@@ -1,3 +1,5 @@
+import random
+
 def choose_secret():
     """Dado un nombre de fichero, esta función devuelve una palabra aleatoria de este fichero transformada a mayúsculas.
     Args:
@@ -5,9 +7,19 @@ def choose_secret():
     Returns:
       secret: Palabra elegida aleatoriamente del fichero transformada a mayúsculas. Ej. "CREMA"
     """
+    """llegim el fitxer de text, i guardem les paraules en una llista"""
+    f = open("palabras_reduced.txt", mode="rt", encoding="utf-8")
+    lista_lineas = f.readlines()
+    f.close()
+    """agafem una paraula random de la llista"""
+    palabra = random.choice(lista_lineas)
+    """transformem la paraula en majúscula"""
+    palabraMajuscula = palabra.upper()
+    return palabraMajuscula
     
-def compare_words():
-    """Dadas dos palabras en mayúsculas (word y secret), esta función calcula las posiciones de las letras de word que aparecen en la misma posición en secret, y las posiciones de las letras de word que aparecen en secret pero en una posición distinta.
+def compare_words(word, secret):
+    """Dadas dos palabras en mayúsculas (word y secret), esta función calcula las posiciones de las letras de word que aparecen 
+        en la misma posición en secret, y las posiciones de las letras de word que aparecen en secret pero en una posición distinta.
     Args:
       word: Una palabra. Ej. "CAMPO"
       secret: Una palabra. Ej. "CREMA"
@@ -15,6 +27,19 @@ def compare_words():
       same_position: Lista de posiciones de word cuyas letras coinciden en la misma posición en secret. En el caso anterior: [0]
       same_letter: Lista de posiciones de word cuyas letras están en secret pero en posiciones distintas. En el caso anterior: [1,2]
     """
+    def same_position():
+      letras_posicion = []
+      for i in range(5):
+        if word[i] == secret[i]:
+          letras_posicion[i]
+      return letras_posicion
+    def same_letter():
+      letra_sinposicion = []
+      for i in range(5):
+        for j in range(5):
+          if word[i] == secret[j]:
+            letra_sinposicion = i
+      return letra_sinposicion
 
 def print_word():
     """Dada una palabra, una lista same_position y otra lista same_letter, esta función creará un string donde aparezcan en mayúsculas las letras de la palabra que ocupen las posiciones de same_position, en minúsculas las letras de la palabra que ocupen las posiciones de same_letter y un guión (-) en el resto de posiciones
