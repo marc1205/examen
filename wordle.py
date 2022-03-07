@@ -54,12 +54,12 @@ def print_word(word, same_position, same_letter):
     """
     palabra = []
     for i in range(4):
-      if word[i] == same_position:
+      if word[i] == same_position[i]:
         palabra[i] = word[i].upper()
-      if word[i] == same_letter:
-        palabra[i] = word[i].lower()
-      if word[i] != (same_position and same_letter):
-        palabra[i] = 0
+      if word[i] == same_letter[i]:
+        palabra[i] = word.lower()
+      else:
+        palabra[i] = "-"
     return palabra
 
 
@@ -88,7 +88,6 @@ if __name__ == "__main__":
     for repeticiones in range(0,6):
         word = input("Introduce una nueva palabra: ")
         same_position, same_letter = compare_words(word)
-        """compare_words()"""
         resultado=print_word(word, same_position, same_letter)
         print(resultado)
         if word == secret:
